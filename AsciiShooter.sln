@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiShooter", "AsciiShooter.csproj", "{C8D1FD1F-5D0C-415B-89D0-AB4DDD488015}"
 EndProject
 Global
