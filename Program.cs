@@ -134,6 +134,10 @@ namespace AsciiShooter
         private static void UpdateMap()
         {
             ChangeMap();
+
+            //TEST GEAR
+            // Gear g1 = new Gear();
+            // g1.Upgrade();
         }
 
 
