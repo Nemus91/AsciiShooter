@@ -157,6 +157,8 @@ namespace AsciiShooter
         private static void UpdateMap()
         {
             //ChangeMap();
+            Gear g1 = new Gear();
+            g1.Upgrade();
         }
 
 
