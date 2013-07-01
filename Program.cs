@@ -12,12 +12,11 @@ namespace AsciiShooter
         const int sizeHeight = 50;
         const int sizeWidth = 2*sizeHeight;
         const bool setBufferSizeFull = true;
-        static List<MoveableObject> ObjectList = new List<MoveableObject>();
-        static char[,] Map = new char[sizeWidth, sizeHeight];
-        static char[,] lastMap = new char[sizeWidth, sizeHeight];
+        static List<GameObject> ObjectList = new List<GameObject>();
         public static bool CloseApplication = false;
         public static bool PauseApplication = false;
-        
+
+
         /// <summary>
         /// Main entry point
         /// </summary>
@@ -37,7 +36,7 @@ namespace AsciiShooter
         private static void Initialize()
         {
             ConsoleInit();
-            MainMenu();
+            MenuInit();
         }
 
         /// <summary>
@@ -66,15 +65,33 @@ namespace AsciiShooter
         }
 
 
-        private static void MainMenu()
+        private static void MenuInit()
         {
             Menu MainMenu = new Menu(3);
-            MainMenu.SetButton(0, "Start Game");
-            MainMenu.SetButton(1, "Start Editor");
-            MainMenu.SetButton(2, "End Game");
+            Action tempAction = new Action(StartGame);
+            MainMenu.SetButton(0, "Start Game", tempAction);
+            tempAction = new Action(StartEditor);
+            MainMenu.SetButton(1, "Start Editor", tempAction);
+            tempAction = new Action(ExitGame);
+            MainMenu.SetButton(2, "End Game", tempAction);
+            ObjectList.Add(MainMenu);
         }
 
 
+        private static void StartGame()
+        {
+            Game Game = new Game(sizeWidth, sizeHeight);
+        }
+
+        private static void StartEditor()
+        {
+
+        }
+
+        private static void ExitGame()
+        {
+
+        }
         
 
 
@@ -90,12 +107,8 @@ namespace AsciiShooter
                 Thread.Sleep(10);
 
             //Update GameData
-            foreach (MoveableObject Obj in ObjectList)
+            foreach (GameObject Obj in ObjectList)
                 Obj.Update();
-            UpdateMap();
-
-            //Draw Output
-            Draw();
 
             //Check if MinframeLength is reached, else wait for it
             TimeSpan TimeDifference = DateTime.Now - GameTime;
@@ -103,36 +116,14 @@ namespace AsciiShooter
                 Thread.Sleep(MinFrameLength - TimeDifference);
         }
 
-        /// <summary>
-        /// Updates graphical Output
-        /// </summary>
-        private static void Draw()
-        {
-            //Check for every Position if something changed and then rewrite it
-            for (int y = 0; y < Map.GetLength(1); y++)
-            {
-                for (int x = 0; x < Map.GetLength(0); x++)
-                {
-                    if (Map[x, y] != lastMap[x, y])
-                    {
-                        Console.SetCursorPosition(x, y);
-                        Console.Write(Map[x, y]);
-                    }
-                }
-            }
-            //Copy the data from Map into lastMap
-            for (int i = 0; i < Map.GetLength(0); i++)
-            {
-                Array.Copy(Map, i*Map.GetLength(1), lastMap, i*Map.GetLength(1), Map.GetLength(1));
-            }
-        }
+        
 
         /// <summary>
         /// Add Object to program's ObjectList
         /// Update-Method of every Object in List is called every frame
         /// </summary>
         /// <param name="obj">Object to add</param>
-        public static void AddObject(MoveableObject obj)
+        public static void AddObject(GameObject obj)
         {
             ObjectList.Add(obj);
         }
@@ -142,80 +133,9 @@ namespace AsciiShooter
         /// Update-Method of every Object in List is called every frame
         /// </summary>
         /// <param name="obj">Object to remove</param>
-        public static void RemoveObject(MoveableObject obj)
+        public static void RemoveObject(GameObject obj)
         {
-            
+            ObjectList.Remove(obj);   
         }
-
-        /// <summary>
-        /// Updates the Map-Array
-        /// </summary>
-        private static void UpdateMap()
-        {
-            //ChangeMap();
-        }
-
-
-        //test methods
-        static int z = 0;
-        static Random a = new Random(20);
-        static int v = 0;
-        private static void ChangeMap()
-        {
-            z++;            
-            if (z % 4 == 0)
-            {
-                v++;
-                int x = a.Next(sizeWidth);
-                int y = a.Next(sizeHeight);
-                int c = a.Next(20);
-                if (v < 49)
-                {
-                    Map[v - 1, v - 1] = (char)0;
-                    Map[v, v] = (char)(64);
-                }
-                if (v < 49)
-                {
-                    Map[2*v - 2, v - 1] = (char)0;
-                    Map[2*v, v] = (char)(64);
-                }
-                else
-                { 
-                    v = 0; 
-                }
-                System.Diagnostics.Debug.WriteLine(v);
-                Console.ReadKey();
-            }
-        }
-
-        /// <summary>
-        /// Fills the Map (Frame and empty spaces)
-        /// </summary>
-        //private static void MapInit()
-        //{
-        //    //Map Init
-        //    for (int y = 0; y < Map.GetLength(1); y++)
-        //    {
-        //        for (int x = 0; x < Map.GetLength(0); x++)
-        //        {
-        //            if (y == 0 || y == 49)
-        //            {
-        //                Map[x, y] = (char)45;
-        //            }
-        //            else
-        //            {
-        //                if (x == 0 || x == 99)
-        //                {
-        //                    Map[x, y] = (char)124;
-        //                }
-        //                else
-        //                {
-        //                    Map[x, y] = (char)0;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
     }
 }

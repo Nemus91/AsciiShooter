@@ -5,24 +5,32 @@ using System.Text;
 
 namespace AsciiShooter
 {
-    public class Menu
+    public class Menu : GameObject
     {
         String[] Button;
+        Action[] OnButtonPush;
         int CursorPosition = 1;
-        public delegate void ButtonPushed ();
 
         public Menu(int AmountButtons)
         {
             Button = new string[AmountButtons];
+            OnButtonPush = new Action[AmountButtons];
         }
 
-        public void SetButton (int Index, string text)
+        public void SetButton (int Index, string text, Action Callback)
         {
             Button[Index] = text;
+            OnButtonPush[Index] = Callback;
             Draw();
         }
 
-        public void Draw()
+        public override void Update()
+        {
+            Controls();
+            Draw();
+        }
+
+        private void Draw()
         {
             for (int i = 1; i <= Button.Length; i++)
             {
@@ -33,10 +41,9 @@ namespace AsciiShooter
             Console.Write((char)62);
         }
 
-        private void Control()
+        private void Controls()
         {
             
-
         }
     }
 }

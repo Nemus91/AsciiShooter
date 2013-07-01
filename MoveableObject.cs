@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsciiShooter
 {
-    public class MoveableObject
+    public class MoveableObject : GameObject
     {
         //The Position of the Object
         public Vector2 Position
@@ -15,22 +15,20 @@ namespace AsciiShooter
         }
 
         //Constructor (Initialize Object)
-        MoveableObject()
+        public MoveableObject()
         {
-            Program.AddObject(this);
             Position = new Vector2(0, 0);
         }
 
-        //"Destructor" (Removes Object from Program's ObjectList)
-        public virtual void Destroy()
+        public MoveableObject(Vector2 Position)
         {
-            Program.RemoveObject(this);
+            this.Position = Position;
         }
 
         /// <summary>
         /// The Update Method is called every frame
         /// </summary>
-        public virtual void Update()
+        public override void Update()
         {
 
         }
