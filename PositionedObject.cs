@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsciiShooter
 {
-    public class PositionedObject
+    public class MoveableObject
     {
         //The Position of the Object
         public Vector2 Position
@@ -15,7 +15,7 @@ namespace AsciiShooter
         }
 
         //Constructor (Initialize Object)
-        PositionedObject()
+        MoveableObject()
         {
             Program.AddObject(this);
             Position = new Vector2(0, 0);
