@@ -7,11 +7,11 @@ using System.Threading;
 namespace AsciiShooter
 {
     public static class Program
-    {
-        static TimeSpan MinFrameLength = TimeSpan.FromMilliseconds(10);
+    {        
         const int sizeHeight = 50;
         const int sizeWidth = 2*sizeHeight;
         const bool setBufferSizeFull = true;
+        static readonly TimeSpan MinFrameLength = TimeSpan.FromMilliseconds(10);
         static List<GameObject> ObjectList = new List<GameObject>();
         public static bool CloseApplication = false;
         public static bool PauseApplication = false;
@@ -35,6 +35,7 @@ namespace AsciiShooter
         /// </summary>
         private static void Initialize()
         {
+            Input.Init();
             ConsoleInit();
             MenuInit();
         }
