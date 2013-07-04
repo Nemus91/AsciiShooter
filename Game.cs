@@ -14,6 +14,7 @@ namespace AsciiShooter
         {
             Map = new char[Width, Height];
             lastMap = new char[Width, Height];
+            Init();
         }
 
         public override void Update()
@@ -21,7 +22,7 @@ namespace AsciiShooter
             Draw();
         }
 
-        private static void Draw()
+        private void Draw()
         {
             //Check for every Position if something changed and then rewrite it
             for (int y = 0; y < Map.GetLength(1); y++)
@@ -42,6 +43,10 @@ namespace AsciiShooter
             }
         }
 
+        private void Init()
+        {
+
+        }
 
 
         //test methods

@@ -75,7 +75,6 @@ namespace AsciiShooter
             MainMenu.SetButton(1, "Start Editor", tempAction);
             tempAction = new Action(ExitGame);
             MainMenu.SetButton(2, "End Game", tempAction);
-            ObjectList.Add(MainMenu);
         }
 
 
@@ -86,7 +85,7 @@ namespace AsciiShooter
 
         private static void StartEditor()
         {
-
+            Editor Editor = new Editor();
         }
 
         private static void ExitGame()
@@ -108,9 +107,10 @@ namespace AsciiShooter
                 Thread.Sleep(10);
 
             //Update GameData
-            foreach (GameObject Obj in ObjectList)
-                Obj.Update();
-
+            for (int i = 0; i < ObjectList.Count; i++ )
+            {
+                ObjectList[i].Update();
+            }
             //Check if MinframeLength is reached, else wait for it
             TimeSpan TimeDifference = DateTime.Now - GameTime;
             if (TimeDifference < MinFrameLength)

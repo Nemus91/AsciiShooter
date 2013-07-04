@@ -41,8 +41,8 @@ namespace AsciiShooter
         /// </summary>
         public override void Update()
         {
-            Controls();
             Draw();
+            Controls();
         }
 
         private void Draw()
