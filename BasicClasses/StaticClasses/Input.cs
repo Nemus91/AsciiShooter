@@ -35,7 +35,7 @@ namespace AsciiShooter
         private static extern AsyncKeyState GetAsyncKeyState(ConsoleKey Key);
 
         /// <summary>
-        /// Returns whether a specific Key has been pressed once, is still pressed or is net pressed
+        /// Returns whether a specific Key has been pressed once, is still pressed or is not pressed
         /// </summary>
         /// <param name="Key">ConsoleKey to check on</param>
         /// <returns>returns element of AsyncKeyState</returns>

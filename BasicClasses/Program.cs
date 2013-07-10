@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using AsciiShooter.BasicClasses.Manager;
 
 namespace AsciiShooter
 {
@@ -65,7 +66,9 @@ namespace AsciiShooter
                 Console.WindowWidth = Console.LargestWindowWidth;
         }
 
-
+        /// <summary>
+        /// Initializing the MainMenu, adding Buttons and their functionality
+        /// </summary>
         private static void MenuInit()
         {
             Menu MainMenu = new Menu(3);
@@ -97,7 +100,6 @@ namespace AsciiShooter
 
         /// <summary>
         /// Called at most every MinFrameLength or else when the last call is finished
-        /// Calls Update-Method of every PositinedObject and updates the "Map"
         /// </summary>
         /// <param name="GameTime"></param>
         private static void Update(DateTime GameTime)
@@ -111,6 +113,7 @@ namespace AsciiShooter
             {
                 ObjectList[i].Update();
             }
+            MoveableObjectManager.Update();
             //Check if MinframeLength is reached, else wait for it
             TimeSpan TimeDifference = DateTime.Now - GameTime;
             if (TimeDifference < MinFrameLength)
