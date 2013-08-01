@@ -52,7 +52,9 @@
     <Compile Include="BasicClasses\AbstractClasses\MoveableObject.cs" />
     <Compile Include="BasicClasses\Program.cs" />
     <Compile Include="Entities\Bullet.cs" />
+    <Compile Include="Entities\Pistol.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="BasicClasses\AbstractClasses\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicClasses\StaticClasses\Vector2.cs" />
     <Compile Include="Entities\TestObject.cs" />
