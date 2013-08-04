@@ -21,10 +21,6 @@ namespace AsciiShooter.Entities
 
         }
 
-        public override void Update()
-        {
-        }
-
         public override char VisRepresentation
         {
             get { return (char)80; }

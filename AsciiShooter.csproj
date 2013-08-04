@@ -46,6 +46,7 @@
     <Compile Include="BasicClasses\Editor.cs" />
     <Compile Include="BasicClasses\Game.cs" />
     <Compile Include="BasicClasses\AbstractClasses\GameObject.cs" />
+    <Compile Include="BasicClasses\Map.cs" />
     <Compile Include="BasicClasses\StaticClasses\MoveableObjectManager.cs" />
     <Compile Include="BasicClasses\StaticClasses\Input.cs" />
     <Compile Include="BasicClasses\Menu.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="BasicClasses\AbstractClasses\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicClasses\StaticClasses\Vector2.cs" />
-    <Compile Include="Entities\TestObject.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

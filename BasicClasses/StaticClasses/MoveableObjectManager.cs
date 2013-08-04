@@ -37,7 +37,6 @@ namespace AsciiShooter.BasicClasses.Manager
         {
             Vector2 PosShift;
             Timer = Timer.AddTicks(1);
-            System.Diagnostics.Debug.WriteLine(Timer.Ticks);
             for (int i = 0; i < Entities.Count; i++)
             {
                 PosShift = new Vector2 (0,0);

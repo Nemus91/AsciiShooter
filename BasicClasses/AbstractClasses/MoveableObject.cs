@@ -31,7 +31,7 @@ namespace AsciiShooter
             get { return mPosition; }
             set
             {
-                if (value != mPosition)
+                if (!value.Equals(mPosition))
                 {
                     hasChanged = true;
                     LastPosition = mPosition;
