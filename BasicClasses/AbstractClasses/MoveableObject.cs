@@ -11,6 +11,15 @@ namespace AsciiShooter
         //for Recognizing Position changes
         public bool hasChanged = false;
 
+        //Checks if it collides with other Entities (OnCollide is still called even if this is on false)<
+        public bool hasCollision = true;
+
+        //called when Colliding with another Entity
+        public virtual void OnCollide(MoveableObject Other)
+        {
+
+        }
+
         //visibleRepresentation
         abstract public char VisRepresentation
         {
@@ -51,6 +60,8 @@ namespace AsciiShooter
         public MoveableObject()
         {
             Position = new Vector2(0, 0);
+            LastPosition = Position;
+            Velocity = Position;
             MoveableObjectManager.Add(this);
         }
 

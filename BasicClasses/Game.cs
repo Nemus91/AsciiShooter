@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AsciiShooter.BasicClasses;
+using AsciiShooter.BasicClasses.Manager;
+using AsciiShooter.Entities;
 
 namespace AsciiShooter
 {
@@ -10,8 +12,6 @@ namespace AsciiShooter
     {
 
         Map Map;
-        List<char> SolidObjects = new List<char>(new char []{'#'});
-        List<char> Collectibles = new List<char>();
         List<MoveableObject> Entities = new List<MoveableObject>();
 
         //Constructor
@@ -22,11 +22,13 @@ namespace AsciiShooter
             Spawn();
         }
 
+        //Initialization Method
         private void MapInit()
         {
             Console.Clear();
-            Map.Load("");
+            Map.Load("");            
             Map.Draw();
+            MoveableObjectManager.Collision = Map;
         }
 
         /// <summary>
@@ -67,13 +69,12 @@ namespace AsciiShooter
         //    }
         //}
 
-
         /// <summary>
         /// Redraws Objects which have changed Position
         /// A moved Object will always be drawn on top
         /// For Objects that didn't moved, those who've been added first to the Entity list are drawn on top
         /// </summary>
-        public void Draw()
+        private void Draw()
         {
             for (int i = Entities.Count-1; i >= 0; i--)
             {
@@ -84,22 +85,21 @@ namespace AsciiShooter
                     Console.SetCursorPosition(Entities[i].LastPosition.X, Entities[i].LastPosition.Y);
                     foreach (MoveableObject Entity in Entities)
                     {
-                        if (Entity.Position == Entities[i].LastPosition)
+                        if (Entity.Position.Equals(Entities[i].LastPosition))
                         {
                             Console.Write(Entity.VisRepresentation);
                             isFieldEmpty = false;
                             break;
                         }
                     }
-                    //if there's no other object to draw, delete the moved Entity's Symbol
+                    //if there's no other object to draw, write from Map
                     if (isFieldEmpty)
                     {
-                        Console.Write((char)0);
+                        Console.Write(Map.Field[Console.CursorLeft, Console.CursorTop]);
                     }
                     //Draw Symbol of the moved Object at new Location
                     Console.SetCursorPosition(Entities[i].Position.X, Entities[i].Position.Y);
                     Console.Write(Entities[i].VisRepresentation);
-
                     Entities[i].hasChanged = false;
                 }
             }

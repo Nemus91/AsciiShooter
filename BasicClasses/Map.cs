@@ -7,7 +7,7 @@ namespace AsciiShooter.BasicClasses
 {
     public class Map
     {
-        char[,] Field;
+        public char[,] Field;
 
         public Map(int SizeX, int SizeY)
         {

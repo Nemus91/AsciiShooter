@@ -8,6 +8,11 @@ namespace AsciiShooter.Entities
    
     public abstract class Weapon : MoveableObject
     {
+        public Weapon()
+        {
+            hasCollision = false;
+        }
+
         public abstract int Damage
         {
             get;
