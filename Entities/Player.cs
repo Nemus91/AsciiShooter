@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AsciiShooter.Entities;
 
 namespace AsciiShooter
 {
@@ -18,6 +19,8 @@ namespace AsciiShooter
            Position.X = x;
            Position.Y = y;
            Velocity = new Vector2(0, 0);
+           Pistol Pistol = new Pistol();
+           Weaponlist.Add(Pistol);
        }
 
        public int Armor = 0;
@@ -27,7 +30,7 @@ namespace AsciiShooter
 
        private Vector2 View = new Vector2 (1,0);
 
-       private List<GameObject> Weaponlist = new List<GameObject>();
+       private List<Weapon> Weaponlist = new List<Weapon>();
 
        private int CurrentWeapon = 0;
 
@@ -60,7 +63,44 @@ namespace AsciiShooter
                else
                    Velocity.X = 0;
            }
+           // sight
+           if (Input.GetKeyState(ConsoleKey.DownArrow) == Input.AsyncKeyState.CurrentlyPressed)
+           {
+               View.Y = -1;
+           }
 
+           if (Input.GetKeyState(ConsoleKey.RightArrow) == Input.AsyncKeyState.CurrentlyPressed)
+           {
+               View.X = 1;
+           }
+           
+           if (Input.GetKeyState(ConsoleKey.UpArrow) == Input.AsyncKeyState.CurrentlyPressed)
+           {
+               View.Y = 1;
+           }
+
+           if (Input.GetKeyState(ConsoleKey.LeftArrow) == Input.AsyncKeyState.CurrentlyPressed)
+           {
+               View.X = -1;
+           }
+
+           if (Input.GetKeyState(ConsoleKey.Q) == Input.AsyncKeyState.HasBeenPressed && CurrentWeapon > 0)
+           {
+               CurrentWeapon--;
+           }
+
+           if (Input.GetKeyState(ConsoleKey.E) == Input.AsyncKeyState.HasBeenPressed && CurrentWeapon < Weaponlist.Count -1)
+           {
+               CurrentWeapon++;
+           }
+
+           if (Input.GetKeyState(ConsoleKey.Spacebar) == Input.AsyncKeyState.CurrentlyPressed)
+           {
+               Bullet B = new Bullet();
+               B.Damage = Weaponlist[CurrentWeapon].Damage;
+               B.Velocity = Weaponlist[CurrentWeapon].Velocity;
+               B.Range = Weaponlist[CurrentWeapon].Range;
+           }
            //ConsoleKeyInfo info;
            //if (Console.KeyAvailable)
            //{
