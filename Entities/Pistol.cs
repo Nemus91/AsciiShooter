@@ -15,7 +15,7 @@ namespace AsciiShooter.Entities
 
             Range = 9;
 
-            Firespeed = 2;
+            Firespeed = 3;
 
             Bulletspeed = 12;
 

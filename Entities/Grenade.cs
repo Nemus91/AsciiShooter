@@ -5,19 +5,19 @@ using System.Text;
 
 namespace AsciiShooter.Entities
 {
-    public class Rocketlauncher : Weapon
+    public class Grenade : Weapon
     {
-        public Rocketlauncher()
+        public Grenade()
         {
-            Damage = 11;
+            Damage = 12;
 
-            Ammunition = 3;
+            Ammunition = 1;
 
-            Range = 14;
+            Range = 9;
 
             Firespeed = 2;
 
-            Bulletspeed = 16;
+            Bulletspeed = 7;
 
         }
 
