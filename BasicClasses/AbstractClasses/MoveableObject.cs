@@ -8,6 +8,7 @@ namespace AsciiShooter
 {
     public abstract class MoveableObject : GameObject
     {
+
         //for Recognizing Position changes
         public bool hasChanged = false;
 
@@ -68,6 +69,8 @@ namespace AsciiShooter
         public override void Destroy()
         {
             MoveableObjectManager.Remove(this);
+            Console.SetCursorPosition(LastPosition.X, LastPosition.Y);
+            Console.Write(" ");
             base.Destroy();
         }
     }

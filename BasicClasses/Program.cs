@@ -109,11 +109,12 @@ namespace AsciiShooter
                 Thread.Sleep(10);
 
             //Update GameData
+            MoveableObjectManager.Update();
             for (int i = 0; i < ObjectList.Count; i++ )
             {
                 ObjectList[i].Update();
-            }
-            MoveableObjectManager.Update();
+            }   
+            MoveableObjectManager.Draw();
             //Check if MinframeLength is reached, else wait for it
             TimeSpan TimeDifference = DateTime.Now - GameTime;
             if (TimeDifference < MinFrameLength)
