@@ -5,25 +5,29 @@ using System.Text;
 
 namespace AsciiShooter.Entities
 {
-    public class Pistol : Weapon
+    public class Grenade : Weapon
     {
-        public Pistol()
+        public Grenade()
         {
-            Damage = 5;
-            
-            Ammunition = -1;
+            Damage = 12;
+
+            Ammunition = 1;
 
             Range = 9;
 
-            Firespeed = 3;
+            Firespeed = 2;
 
-            Bulletspeed = 12;
+            Bulletspeed = 7;
 
+        }
+
+        public override void Update()
+        {
         }
 
         public override char VisRepresentation
         {
-            get { return (char)80; }
+            get { return (char)82; }
         }
 
         public override int Ammunition

@@ -5,11 +5,14 @@ using System.Text;
 
 namespace AsciiShooter.BasicClasses.Manager
 {
+    /// <summary>
+    /// Applies Velocity to Position for all Moveable Objects and performs Collision Checks
+    /// </summary>
     public class MoveableObjectManager
     {
         static DateTime Timer = new DateTime();
         static List<MoveableObject> Entities = new List<MoveableObject>();
-
+        public static Map Collision;
 
         /// <summary>
         /// Adds Object to Manager
@@ -37,7 +40,6 @@ namespace AsciiShooter.BasicClasses.Manager
         {
             Vector2 PosShift;
             Timer = Timer.AddTicks(1);
-            System.Diagnostics.Debug.WriteLine(Timer.Ticks);
             for (int i = 0; i < Entities.Count; i++)
             {
                 PosShift = new Vector2 (0,0);
@@ -49,7 +51,34 @@ namespace AsciiShooter.BasicClasses.Manager
                 {
                     PosShift.Y += Math.Sign(Entities[i].Velocity.Y)*1;
                 }
-                Entities[i].Position += PosShift;
+
+                //Only do, if something has changed
+                if (PosShift.X != 0 || PosShift.Y != 0)
+                {
+                    Vector2 newPos = (Entities[i].Position += PosShift);
+                    //Levelcollision
+                    if (Collision != null)
+                    {
+                        if (Collision.Field[newPos.X, newPos.Y] != (char) 0)
+                        {
+                            newPos = Entities[i].LastPosition;
+                        }
+                    }
+                    //Entity-Collision
+                    foreach (MoveableObject Entity in Entities)
+                    {
+                        if (Entity != Entities[i] && Entity.Position.Equals(newPos))
+                        {
+                            if (Entity.hasCollision && Entities[i].hasCollision)
+                            {
+                                newPos = Entities[i].LastPosition;
+                            }
+                            Entity.OnCollide(Entities[i]);
+                            Entities[i].OnCollide(Entity);
+                        }
+                    }
+                    Entities[i].Position = newPos;
+                }
             }
         }
     }

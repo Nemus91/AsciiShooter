@@ -57,5 +57,19 @@ namespace AsciiShooter
             }
             return base.Equals(obj);
         }
+
+        public double GetLength()
+        {
+            return Math.Sqrt((X * X) + (Y * Y));
+        }
+
+        public void Normalize()
+        {
+            double length = GetLength();
+            double newX = X / length;
+            double newY = Y / length;
+            X = (int) Math.Round(newX);
+            Y = (int) Math.Round(newY);
+        }
     }
 }

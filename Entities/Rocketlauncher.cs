@@ -5,25 +5,29 @@ using System.Text;
 
 namespace AsciiShooter.Entities
 {
-    public class Pistol : Weapon
+    public class Rocketlauncher : Weapon
     {
-        public Pistol()
+        public Rocketlauncher()
         {
-            Damage = 5;
-            
-            Ammunition = -1;
+            Damage = 11;
 
-            Range = 9;
+            Ammunition = 3;
 
-            Firespeed = 3;
+            Range = 14;
 
-            Bulletspeed = 12;
+            Firespeed = 2;
 
+            Bulletspeed = 16;
+
+        }
+
+        public override void Update()
+        {
         }
 
         public override char VisRepresentation
         {
-            get { return (char)80; }
+            get { return (char)82; }
         }
 
         public override int Ammunition
