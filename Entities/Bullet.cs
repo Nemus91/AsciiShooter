@@ -11,13 +11,13 @@ namespace AsciiShooter.Entities
         {
             get
             {
-                return (char)11; 
+                return (char)111; 
             }
         }
 
         public override void Update()
         {
-            if (Position != (LastPosition))
+            if (hasChanged)
             {
                 Range --;
             }
