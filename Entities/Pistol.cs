@@ -19,11 +19,22 @@ namespace AsciiShooter.Entities
 
             Bulletspeed = 12;
 
+            Symbol = (char) 80;
+
+            Name = "Pistol";
+
         }
 
-        public override char VisRepresentation
+        public override char Symbol
         {
-            get { return (char)80; }
+            get;
+            set;
+        }
+
+        public override string  Name
+        {
+            get;
+            set;
         }
 
         public override int Ammunition

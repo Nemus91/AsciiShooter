@@ -8,6 +8,12 @@ namespace AsciiShooter.Entities
     public class Collectable : MoveableObject
     {
         Weapon Item;
+
+        public override char VisRepresentation
+        {
+            get { return Item.Symbol; }
+        }
+
         public Collectable(Weapon Item, int X, int Y)
         {
             this.Item = Item;

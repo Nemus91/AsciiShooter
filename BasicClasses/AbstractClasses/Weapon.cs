@@ -8,6 +8,18 @@ namespace AsciiShooter.Entities
    
     public abstract class Weapon : GameObject
     {
+        public abstract string Name
+        {
+            get;
+            set;
+        }
+
+        public abstract char Symbol
+        {
+            get;
+            set;
+        }
+
         public Weapon()
         {
         
