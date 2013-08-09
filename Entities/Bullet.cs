@@ -15,6 +15,18 @@ namespace AsciiShooter.Entities
             }
         }
 
+        public override void OnCollide(MoveableObject Other)
+        {
+            if (Other != null)
+            {
+                if (Other.GetType() == typeof(Enemy))
+                {
+                    ((Enemy)Other).Health -= Damage;
+                }               
+            }
+            Destroy();
+        }
+
         public override void Update()
         {
             if (hasChanged)

@@ -8,7 +8,7 @@ namespace AsciiShooter
 {
    public class Player : MoveableObject  
     {
-       public Game Game;
+       private DateTime LastTimeShot = DateTime.Now;
 
        public override char VisRepresentation
        {
@@ -27,6 +27,7 @@ namespace AsciiShooter
            Console.Write("Armor: 0");
            Console.SetCursorPosition(0, 53);
            Console.Write("Money: 0");
+           View = new Vector2(1, 0);
        }
 
        public int Armor = 0;
@@ -54,7 +55,7 @@ namespace AsciiShooter
            }
        }
 
-       private List<Weapon> Weaponlist = new List<Weapon>();
+       public List<Weapon> Weaponlist = new List<Weapon>();
 
        private int CurrentWeapon = 0;
 
@@ -99,7 +100,7 @@ namespace AsciiShooter
            Console.SetCursorPosition(0, 54);
            Console.Write("                    ");
            Console.SetCursorPosition(0, 54);
-           Console.Write(Weaponlist[CurrentWeapon].GetType());
+           //Console.Write(Weaponlist[CurrentWeapon].Name);
            
        }
 
@@ -130,15 +131,15 @@ namespace AsciiShooter
                    Velocity.X = 0;
            }
            // sight
-           if (Input.GetKeyState(ConsoleKey.DownArrow) == Input.AsyncKeyState.CurrentlyPressed)
+           if (Input.GetKeyState(ConsoleKey.K) == Input.AsyncKeyState.CurrentlyPressed)
            {
-               View.Y = -1;
+               View.Y = 1;
            }
            else
            {
-               if (Input.GetKeyState(ConsoleKey.UpArrow) == Input.AsyncKeyState.CurrentlyPressed)
+               if (Input.GetKeyState(ConsoleKey.I) == Input.AsyncKeyState.CurrentlyPressed)
                {
-                   View.Y = 1;
+                   View.Y = -1;
                }
                else
                {
@@ -146,13 +147,13 @@ namespace AsciiShooter
                }
            }
 
-           if (Input.GetKeyState(ConsoleKey.RightArrow) == Input.AsyncKeyState.CurrentlyPressed)
+           if (Input.GetKeyState(ConsoleKey.L) == Input.AsyncKeyState.CurrentlyPressed)
            {
                View.X = 1;
            }
            else
            {
-               if (Input.GetKeyState(ConsoleKey.LeftArrow) == Input.AsyncKeyState.CurrentlyPressed)
+               if (Input.GetKeyState(ConsoleKey.J) == Input.AsyncKeyState.CurrentlyPressed)
                {
                    View.X = -1;
                }
@@ -178,61 +179,21 @@ namespace AsciiShooter
            //shoot
            if (Input.GetKeyState(ConsoleKey.Spacebar) == Input.AsyncKeyState.CurrentlyPressed)
            {
-               System.Diagnostics.Debug.Write("Shoot");
-               Bullet B = new Bullet();
-               Game.AddEntity(B);
-               B.Position = new Vector2(Position + View);
-               B.Damage = Weaponlist[CurrentWeapon].Damage;
-               B.Velocity = new Vector2(Weaponlist[CurrentWeapon].Bulletspeed * View.X, Weaponlist[CurrentWeapon].Bulletspeed * View.Y);
-               B.Range = Weaponlist[CurrentWeapon].Range;
+               TimeSpan Difference = DateTime.Now - LastTimeShot;
+
+               System.Diagnostics.Debug.WriteLine(DateTime.Now.Ticks);
+
+               if (Difference > TimeSpan.FromMilliseconds(Weaponlist[CurrentWeapon].Firespeed * 100))
+               {
+                   LastTimeShot = DateTime.Now;
+                   Bullet B = new Bullet();
+                   B.Position = new Vector2(Position + View);
+                   B.Damage = Weaponlist[CurrentWeapon].Damage;
+                   B.Velocity = new Vector2(Weaponlist[CurrentWeapon].Bulletspeed * View.X, Weaponlist[CurrentWeapon].Bulletspeed * View.Y);
+                   B.Range = Weaponlist[CurrentWeapon].Range;
+               }
            }
-           //ConsoleKeyInfo info;
-           //if (Console.KeyAvailable)
-           //{
-           //     info = Console.ReadKey();
-           //     switch (info.Key)
-           //     {
-           //         case ConsoleKey.S:
-           //             Velocity.Y = Movementspeed;
-           //             break;
-
-           //         case ConsoleKey.W:
-           //             Velocity.Y =- Movementspeed;
-           //             break;
-
-           //         case ConsoleKey.A:
-           //             Velocity.X =- Movementspeed;
-           //             break;
-
-           //         case ConsoleKey.D:
-           //             Velocity.X = Movementspeed;
-           //             break;
-
-           //         case ConsoleKey.UpArrow:
-           //             View.X = 0;
-           //             View.Y = 1;
-           //             break;
-
-           //         case ConsoleKey.DownArrow:
-           //             View.X = 1;
-           //             View.Y = 0;
-           //             break;
-
-           //         case ConsoleKey.RightArrow:
-           //             View.X = 1;
-           //             View.Y = 0;
-           //             break;
-
-           //         case ConsoleKey.LeftArrow:
-           //             View.X = -1;
-           //             View.Y = 0;
-           //             break;
-
-
-           //     }
-
-           //}
-
+          
       
        }
     }
