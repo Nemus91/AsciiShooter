@@ -6,11 +6,11 @@ using System.Text;
 namespace AsciiShooter.Entities
 {
    
-    public abstract class Weapon : MoveableObject
+    public abstract class Weapon : GameObject
     {
         public Weapon()
         {
-            hasCollision = false;
+        
         }
 
         public abstract int Damage
