@@ -80,7 +80,7 @@ namespace AsciiShooter
             if (Input.GetKeyState(ConsoleKey.Enter) == Input.AsyncKeyState.HasBeenPressed)
             {
                 OnButtonPush[CursorPosition - 1]();
-                base.Destroy();
+                Destroy();
             }
         }
     }

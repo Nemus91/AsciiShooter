@@ -7,7 +7,10 @@ namespace AsciiShooter
 {
     public abstract class GameObject
     {
-        public abstract void Update();
+        public virtual void Update()
+        {
+
+        }
 
         public GameObject()
         {
