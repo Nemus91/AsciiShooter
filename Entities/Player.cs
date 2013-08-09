@@ -137,8 +137,14 @@ namespace AsciiShooter
            else
            {
                if (Input.GetKeyState(ConsoleKey.UpArrow) == Input.AsyncKeyState.CurrentlyPressed)
-           {
-               View.Y = 1;
+               {
+                   View.Y = 1;
+               }
+               else
+               {
+                   View = new Vector2(View.X, 0);
+               }
+           }
 
            if (Input.GetKeyState(ConsoleKey.RightArrow) == Input.AsyncKeyState.CurrentlyPressed)
            {
@@ -146,10 +152,14 @@ namespace AsciiShooter
            }
            else
            {
-
-           if (Input.GetKeyState(ConsoleKey.LeftArrow) == Input.AsyncKeyState.CurrentlyPressed)
-           {
-               View.X = -1;
+               if (Input.GetKeyState(ConsoleKey.LeftArrow) == Input.AsyncKeyState.CurrentlyPressed)
+               {
+                   View.X = -1;
+               }
+               else
+               {
+                   View = new Vector2(0, View.Y);
+               }
            }
 
            //Weaponchange
@@ -165,6 +175,7 @@ namespace AsciiShooter
                ShowWeapon();
            }
 
+           //shoot
            if (Input.GetKeyState(ConsoleKey.Spacebar) == Input.AsyncKeyState.CurrentlyPressed)
            {
                System.Diagnostics.Debug.Write("Shoot");
