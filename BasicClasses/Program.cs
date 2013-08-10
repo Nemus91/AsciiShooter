@@ -71,13 +71,22 @@ namespace AsciiShooter
         /// </summary>
         private static void MenuInit()
         {
-            Menu MainMenu = new Menu(3);
+            Menu MainMenu = new Menu(4);
+
             Action tempAction = new Action(StartGame);
             MainMenu.SetButton(0, "Start Game", tempAction);
+
             tempAction = new Action(StartEditor);
             MainMenu.SetButton(1, "Start Editor", tempAction);
+
             tempAction = new Action(ExitGame);
             MainMenu.SetButton(2, "End Game", tempAction);
+
+
+//MARK: ZUM TESTEN- KANN WIEDER RAUS
+            tempAction = new Action(StartShop);
+            MainMenu.SetButton(3, "Shop", tempAction);
+//------------------------------------------------------
         }
 
 
@@ -88,14 +97,21 @@ namespace AsciiShooter
 
         private static void StartEditor()
         {
-            Editor Editor = new Editor();
+            Editor Editor = new Editor(sizeWidth, sizeHeight);
         }
 
         private static void ExitGame()
         {
 
         }
-        
+
+
+//MARK: ZUM TESTEN - KANN WIEDER RAUS
+        private static void StartShop()
+        {
+            Shop shop = new Shop(sizeWidth, sizeHeight);
+        }
+//------------------------------------------------------       
 
 
         /// <summary>

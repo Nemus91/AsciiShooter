@@ -22,7 +22,7 @@ namespace AsciiShooter
            Velocity = new Vector2(0, 0);
            Pistol Pistol = new Pistol();
            Weaponlist.Add(Pistol);
-           ShowWeapon();
+           //ShowWeapon();
            Console.SetCursorPosition(0, 51);
            Console.Write("Armor: 0");
            Console.SetCursorPosition(0, 53);
@@ -32,12 +32,16 @@ namespace AsciiShooter
 
        public int Armor = 0;
        public int Health = 50;
-       public int Money = 0;
+       public int Money = 2000;
+       public string Weapon = "P";
+       public int Ammo = 0;
        private int Movementspeed = 4;
 
        private int displayedArmor;
        private int displayedHealth;
        private int displayedMoney;
+       private string displayedWeapon;
+       private int displayedAmmo;
 
        private Vector2 mView;
        private Vector2 View
@@ -93,16 +97,35 @@ namespace AsciiShooter
                Console.Write("Money: "+Money);
                displayedMoney = Money;
            }
+
+           if (Weapon != displayedWeapon)
+           {
+               Console.SetCursorPosition(0, 54);
+               Console.Write("               ");
+               Console.SetCursorPosition(0, 54);
+               Console.Write("Weapon: " + Weapon);
+               displayedWeapon = Weapon;
+           }
+
+//MARK: Jede Waffe braucht eigene Munition
+           if (Ammo != displayedAmmo)
+           {
+               Console.SetCursorPosition(0, 55);
+               Console.Write("               ");
+               Console.SetCursorPosition(0, 55);
+               Console.Write("Ammo: " + Ammo);
+               displayedAmmo = Ammo;
+           }
        }
 
-       private void ShowWeapon()
-       {
-           Console.SetCursorPosition(0, 54);
-           Console.Write("                    ");
-           Console.SetCursorPosition(0, 54);
-           //Console.Write(Weaponlist[CurrentWeapon].Name);
+       //private void ShowWeapon()
+       //{
+       //    Console.SetCursorPosition(0, 54);
+       //    Console.Write("                    ");
+       //    Console.SetCursorPosition(0, 54);
+       //    //Console.Write(Weaponlist[CurrentWeapon].Name);
            
-       }
+       //}
 
 
        private void Controlls()
@@ -167,13 +190,13 @@ namespace AsciiShooter
            if (Input.GetKeyState(ConsoleKey.Q) == Input.AsyncKeyState.HasBeenPressed && CurrentWeapon > 0)
            {
                CurrentWeapon--;
-               ShowWeapon();
+               //ShowWeapon();
            }
 
            if (Input.GetKeyState(ConsoleKey.E) == Input.AsyncKeyState.HasBeenPressed && CurrentWeapon < Weaponlist.Count -1)
            {
                CurrentWeapon++;
-               ShowWeapon();
+               //ShowWeapon();
            }
 
            //shoot

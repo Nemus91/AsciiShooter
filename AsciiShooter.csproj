@@ -47,6 +47,7 @@
     <Compile Include="BasicClasses\Game.cs" />
     <Compile Include="BasicClasses\AbstractClasses\GameObject.cs" />
     <Compile Include="BasicClasses\Map.cs" />
+    <Compile Include="BasicClasses\Shop.cs" />
     <Compile Include="BasicClasses\StaticClasses\MoveableObjectManager.cs" />
     <Compile Include="BasicClasses\StaticClasses\Input.cs" />
     <Compile Include="BasicClasses\Menu.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Entities\Collectable.cs" />
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Grenade.cs" />
+    <Compile Include="Entities\MP5.cs" />
     <Compile Include="Entities\Pistol.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="BasicClasses\AbstractClasses\Weapon.cs" />
