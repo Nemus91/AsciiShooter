@@ -13,30 +13,31 @@ namespace AsciiShooter
 
         Map map;
 
-        public static bool checkedmoney;
+        Player player;
+
+        public bool checkedmoney;
 
 //Fictional money ammounts
-        public static int mp5value = 200;
-        public static int mp5ammovalue = 20;
-        public static int ak47value = 500;
-        public static int ak47ammovalue = 50;
-        public static int rlvalue = 1000;
-        public static int rocketvalue = 100;
+        public int mp5value = 200;
+        public int mp5ammovalue = 20;
+        public int ak47value = 500;
+        public int ak47ammovalue = 50;
+        public int rlvalue = 1000;
+        public int rocketvalue = 100;
 
-        public static int armorvalue = 75;
-
-        public Shop (int Width, int Height)
+        public int armorvalue = 75;
+        
+        public Shop(Player ThePlayer)
         {
-            map = new Map (Width, Height);
+            player = ThePlayer;
             MenuInit();
         }
 
 
 //FUNKTION DAS MAN MEHRERE SACHEN AUSWHÄLEN KANN??????? bzw erneut wählen kann
-        private static void MenuInit()
+        private void MenuInit()
         {
                 Player player = new Player(0, 0);
-
 
                 Menu ShopMenu = new Menu(8);
 
@@ -66,28 +67,20 @@ namespace AsciiShooter
 
         }
 
-        private static void BuyMP5()
+        private void BuyMP5()
         {
-            Player player = new Player(0, 0);
-
             CheckMoney(mp5value);
-
             if (checkedmoney == true)
             {
                 player.Money -= mp5value;
-                player.Weapon = "MP5";
-
                 MP5 mp = new MP5();
                 player.Weaponlist.Add(mp);
             }
-
         }
 
-        private static void MP5Ammo()
+        private void MP5Ammo()
         {
-            Player player = new Player(0, 0);
-
-            CheckMoney(mp5ammovalue);
+           CheckMoney(mp5ammovalue);
 
             if (checkedmoney == true)
             {
@@ -96,26 +89,20 @@ namespace AsciiShooter
             }
         }
 
-        private static void BuyAk47()
+        private void BuyAk47()
         {
-            Player player = new Player(0, 0);
-
             CheckMoney(ak47value);
 
             if (checkedmoney == true)
             {
                 player.Money -= ak47value;
-                player.Weapon = "AK47";
-
                 Ak47 ak = new Ak47();
                 player.Weaponlist.Add(ak);
             }
         }
 
-        private static void AKAmmo()
+        private void AKAmmo()
         {
-            Player player = new Player(0, 0);
-
             CheckMoney(ak47ammovalue);
 
             if (checkedmoney == true)
@@ -125,26 +112,20 @@ namespace AsciiShooter
             }
         }
 
-        private static void BuyRocketLauncher()
+        private void BuyRocketLauncher()
         {
-            Player player = new Player(0, 0);
-
             CheckMoney(rlvalue);
 
             if (checkedmoney == true)
             {
                 player.Money -= rlvalue;
-                player.Weapon = "RL";
-
                 Rocketlauncher rl = new Rocketlauncher();
                 player.Weaponlist.Add(rl);
             }
         }
 
-        private static void RocketAmmo()
+        private void RocketAmmo()
         {
-            Player player = new Player(0, 0);
-
             CheckMoney(rocketvalue);
 
             if (checkedmoney == true)
@@ -154,10 +135,8 @@ namespace AsciiShooter
             }
         }
 
-        private static void BuyArmor()
+        private void BuyArmor()
         {
-            Player player = new Player(0, 0);
-
             CheckMoney(armorvalue);
 
             if (checkedmoney == true)
@@ -167,10 +146,8 @@ namespace AsciiShooter
             }
         }
 
-        private static bool CheckMoney(int amount)
+        private bool CheckMoney(int amount)
         {
-            Player player = new Player(0, 0);
-
             if (player.Money >= amount)
             {
                 return checkedmoney = true;
@@ -182,7 +159,7 @@ namespace AsciiShooter
             }
         }
 
-        private static void Exit()
+        private void Exit()
         {
 // BITTE FÜLL MICH AUS^^
         }

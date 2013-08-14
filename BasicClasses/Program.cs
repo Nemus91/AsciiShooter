@@ -109,7 +109,7 @@ namespace AsciiShooter
 //MARK: ZUM TESTEN - KANN WIEDER RAUS
         private static void StartShop()
         {
-            Shop shop = new Shop(sizeWidth, sizeHeight);
+            Shop shop = new Shop(new Player(0, 0));
         }
 //------------------------------------------------------       
 
