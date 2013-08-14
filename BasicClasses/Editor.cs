@@ -37,7 +37,7 @@ namespace AsciiShooter
 
             Console.WriteLine("EDITOR");
             Console.WriteLine("Arrows: Move, Enter: Place Wall/Place Floor");
-            Console.WriteLine("X: Set End Point/Remove End Point, O: Set Start Point/Remove Start Point");
+            Console.WriteLine("X: Set End Point/Remove End Point, O: Set Start Point/Remove Start Point, E: Add Enemy Spawnpoint/Remove Enemy Spawnpoint");
             Console.WriteLine("L/S + 1-9: Load/Save Slot 1-9");
             
         }
@@ -121,6 +121,19 @@ namespace AsciiShooter
           {
               Map[Console.CursorLeft, Console.CursorTop - 5] = ' ';
               startpointset = false;
+          }
+      }
+
+      if (Input.GetKeyState(ConsoleKey.E) == Input.AsyncKeyState.HasBeenPressed)
+      {
+
+          if (Map[Console.CursorLeft, Console.CursorTop - 5] == ' ')
+          {
+              Map[Console.CursorLeft, Console.CursorTop - 5] = 'E';
+          }
+          else if (Map[Console.CursorLeft, Console.CursorTop - 5] == 'E')
+          {
+              Map[Console.CursorLeft, Console.CursorTop - 5] = ' ';
           }
       }
 
@@ -279,7 +292,6 @@ namespace AsciiShooter
                 try
                 {
                         String[] level = System.IO.File.ReadAllLines(appDirectory + "editorlevel"+ place);
-                        System.Diagnostics.Debug.WriteLine(level[0]);
                         for (int i = 0; i < level.Count(); i++)
                         {
                             char[] temp = level[i].ToCharArray();

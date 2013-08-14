@@ -5,12 +5,14 @@ using System.Text;
 using AsciiShooter.BasicClasses;
 using AsciiShooter.BasicClasses.Manager;
 using AsciiShooter.Entities;
+using System.Threading;
 
 namespace AsciiShooter
 {
     public class Game : GameObject
     {
         Map Map;
+        Player PlayerInstance;
 
         //Constructor
         public Game(int Width, int Height)
@@ -23,8 +25,9 @@ namespace AsciiShooter
         //Initialization Method
         private void MapInit()
         {
+            Random tempRnd = new Random();
             Console.Clear();
-            Map.Load("");            
+            Map.Load(1);            
             Map.Draw();
             MoveableObjectManager.Map = Map;
         }
@@ -34,8 +37,63 @@ namespace AsciiShooter
         /// </summary>
         private void Spawn()
         {
-            Player P = new Player(10, 10);
+            for (int y = 0; y < Map.Field.GetLength(1)-1; y++)
+            {
+                for (int x = 0; x < Map.Field.GetLength(0) - 1; x++)
+                {
+                    //Spawnpoint Player
+                    if (Map.Field[x, y] == 'X')
+                    {
+                        Map.Field[x, y] = ' ';
+                        if (PlayerInstance == null)
+                            PlayerInstance = new Player(x, y);
+                        else
+                            PlayerInstance.Position = new Vector2(x, y);                       
+                    }
+                    //End of Level
+                    if (Map.Field[x, y] == 'O')
+                    {
+                        Map.Field[x, y] = ' ';
+                        EndOfLevel End = new EndOfLevel(x, y);
+                        End.Game = this;   
+                    }
+                    //Spawn Enemies
+                    if (Map.Field[x, y] == 'E')
+                    {
+                        Map.Field[x, y] = ' ';
+                        Enemy enemy = new Enemy(x, y);
+                        enemy.Player = PlayerInstance;
+                        enemy.Map = Map;
+                    }
+                }
+            }
         }
+
+        /// <summary>
+        /// Loads new Map, spawns Enemies
+        /// </summary>
+        public void Nextlevel()
+        {
+            //currently hard-coded for 9 existing maps (1-9)
+            //Map 0 is kept as Editor standard map and not used in game
+            Random tempRandom = new Random();
+            Map.Load(tempRandom.Next(1, 10));
+            Map.Draw();
+            MoveableObjectManager.Map = Map;
+            Spawn();
+        }
+
+        /// <summary>
+        /// Unloads Map and clears entity list (except for the Player)
+        /// </summary>
+        public void Endlevel()
+        {
+            MoveableObjectManager.Map = null;
+            MoveableObjectManager.Clear();
+            Shop Shop = new Shop(PlayerInstance);
+            Shop.game = this;
+        }
+
 
 
         

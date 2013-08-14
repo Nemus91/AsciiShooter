@@ -12,7 +12,12 @@ namespace AsciiShooter.BasicClasses.Manager
     {
         static DateTime Timer = new DateTime();
         static List<MoveableObject> Entities = new List<MoveableObject>();
-        public static Map Map;
+        static List<MoveableObject> EntitiesToDestroy = new List<MoveableObject>();
+        public static Map Map
+        {
+            private get;
+            set;
+        }
 
         /// <summary>
         /// Adds Object to Manager
@@ -24,12 +29,12 @@ namespace AsciiShooter.BasicClasses.Manager
         }
 
         /// <summary>
-        /// Removes Object from Manager
+        /// Adds Object to DestroyCandidates, which are removed every frame
         /// </summary>
         /// <param name="obj">Object to Remove</param>
         public static void Remove(MoveableObject obj)
         {
-            Entities.Remove(obj);
+            EntitiesToDestroy.Add(obj);
         }
 
         /// <summary>
@@ -59,8 +64,9 @@ namespace AsciiShooter.BasicClasses.Manager
                     //Levelcollision
                     if (Map != null)
                     {
-                        if (Map.Field[newPos.X, newPos.Y] != (char) 0)
+                         if (Map.Field[newPos.X, newPos.Y] != ' ')
                         {
+                            Entities[i].OnCollide(null);
                             newPos = Entities[i].Position;
                         }
                     }
@@ -71,7 +77,7 @@ namespace AsciiShooter.BasicClasses.Manager
                         {
                             if (Entity.hasCollision && Entities[i].hasCollision)
                             {
-                                newPos = Entities[i].LastPosition;
+                                newPos = Entities[i].Position;
                             }
                             Entity.OnCollide(Entities[i]);
                             Entities[i].OnCollide(Entity);
@@ -80,6 +86,7 @@ namespace AsciiShooter.BasicClasses.Manager
                     Entities[i].Position = newPos;
                 }
             }
+            DestroyObjects();
         }
 
         /// <summary>
@@ -89,7 +96,9 @@ namespace AsciiShooter.BasicClasses.Manager
         /// </summary>
         public static void Draw()
         {
-            for (int i = Entities.Count - 1; i >= 0; i--)
+            if (Map == null)
+                return;
+            for (int i = 0; i < Entities.Count; i++)
             {
                 if (Entities[i].hasChanged)
                 {
@@ -117,6 +126,49 @@ namespace AsciiShooter.BasicClasses.Manager
                 }
             }
         }
+
+        /// <summary>
+        /// Removes Object from EntityList and Redraws Map at their Position
+        /// </summary>
+        private static void DestroyObjects()
+        
+        {
+            //Redraw Position of Destroyed Object with Entity or MapData
+            foreach (MoveableObject Obj in EntitiesToDestroy)
+            {
+                bool isFieldEmpty = true;
+                Console.SetCursorPosition(Obj.Position.X, Obj.Position.Y);
+                foreach (MoveableObject Entity in Entities)
+                {
+                    if (Entity.Position.Equals(Obj.Position) && !EntitiesToDestroy.Contains(Entity))
+                    {                        
+                        Console.Write(Entity.VisRepresentation);
+                        isFieldEmpty = false;
+                    }
+                }
+                if (isFieldEmpty)
+                {
+                    Console.Write(Map.Field[Console.CursorLeft, Console.CursorTop]);
+                }
+            }
+
+            //Remove from EntityList
+            foreach (MoveableObject Obj in EntitiesToDestroy)
+            {
+                Entities.Remove(Obj);
+            }
+            EntitiesToDestroy.Clear();
+        }
+
+        public static void Clear()
+        {
+            foreach (MoveableObject Entity in Entities)
+            {
+                if (Entity.GetType() != typeof(Player))
+                    Entity.Destroy();
+            }
+        }
+
     }
 }
 

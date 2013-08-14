@@ -26,18 +26,31 @@ namespace AsciiShooter.BasicClasses
             }
         }
 
-        public void Load(string Filename)
+        /// <summary>
+        /// Load Map
+        /// by Val Tamer
+        /// </summary>
+        /// <param name="place">Map Index</param>
+        public void Load(int place)
         {
-            //Test Load
-            for (int y = 0; y < Field.GetLength(1); y++)
+            String appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            try
             {
-                for (int x = 0; x < Field.GetLength(0); x++)
+                String[] level = System.IO.File.ReadAllLines(appDirectory + "editorlevel" + place);
+                for (int i = 0; i < level.Count(); i++)
                 {
-                    if (y == 0 || y == Field.GetLength(1) - 1)
-                        Field[x, y] = (char)45;
-                    if (x == 0 || x == Field.GetLength(0) - 1)
-                        Field[x, y] = (char)124;
+                    char[] temp = level[i].ToCharArray();
+                    for (int j = 0; j < temp.GetLength(0); j++)
+                    {
+                        Field[j, i] = temp[j];
+                    }
                 }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("File could not be read.");
             }
         }
     }
