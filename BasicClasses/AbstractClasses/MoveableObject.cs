@@ -69,8 +69,6 @@ namespace AsciiShooter
         public override void Destroy()
         {
             MoveableObjectManager.Remove(this);
-            Console.SetCursorPosition(LastPosition.X, LastPosition.Y);
-            Console.Write(" ");
             base.Destroy();
         }
     }

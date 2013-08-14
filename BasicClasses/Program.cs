@@ -81,12 +81,6 @@ namespace AsciiShooter
 
             tempAction = new Action(ExitGame);
             MainMenu.SetButton(2, "End Game", tempAction);
-
-
-//MARK: ZUM TESTEN- KANN WIEDER RAUS
-            tempAction = new Action(StartShop);
-            MainMenu.SetButton(3, "Shop", tempAction);
-//------------------------------------------------------
         }
 
 
@@ -103,15 +97,7 @@ namespace AsciiShooter
         private static void ExitGame()
         {
 
-        }
-
-
-//MARK: ZUM TESTEN - KANN WIEDER RAUS
-        private static void StartShop()
-        {
-            Shop shop = new Shop(sizeWidth, sizeHeight);
-        }
-//------------------------------------------------------       
+        }     
 
 
         /// <summary>
@@ -129,7 +115,7 @@ namespace AsciiShooter
             for (int i = 0; i < ObjectList.Count; i++ )
             {
                 ObjectList[i].Update();
-            }   
+            }
             MoveableObjectManager.Draw();
             //Check if MinframeLength is reached, else wait for it
             TimeSpan TimeDifference = DateTime.Now - GameTime;

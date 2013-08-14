@@ -51,7 +51,7 @@ namespace AsciiShooter
             {
                 Console.SetCursorPosition(9, i * 5);
                 if (i != CursorPosition)
-                    Console.Write((char)0);
+                    Console.Write(' ');
                 else
                     Console.Write((char)62);
 
