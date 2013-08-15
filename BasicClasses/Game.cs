@@ -67,6 +67,15 @@ namespace AsciiShooter
                     }
                 }
             }
+            //bool hasSpawned = false;
+            //Random tempRnd = new Random();
+            //while (!hasSpawned)
+            //{
+            //    Vector2 Spawn = new Vector2(tempRnd.Next(Map.Field.GetLength(1)), Map.Field.GetLength(2));
+            //    if (Map.Field[Spawn.X, Spawn.Y] == ' ')
+
+            //}
+           
         }
 
         /// <summary>

@@ -33,9 +33,22 @@ namespace AsciiShooter
        }
 
        public int Armor = 0;
-       public int Health = 50;
+       private int mHealth = 300;
+       public int Health
+       {
+           get
+           {
+               return mHealth;
+           }
+           set
+           {
+               mHealth = value;
+               if (mHealth == 0)
+                   Destroy();
+           }
+       }
        public int Money = 0;
-       private int Movementspeed = 4;
+       private int Movementspeed = 6;
 
        private int displayedArmor;
        private int displayedHealth;

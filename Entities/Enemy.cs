@@ -30,7 +30,7 @@ namespace AsciiShooter.Entities
             }
         }
         private int Damage = 10;
-        private int Movementspeed = 5;
+        private int Movementspeed = 7;
         private int AcquisitionRange = 11;
 
         public Player Player
