@@ -13,6 +13,8 @@ namespace AsciiShooter.BasicClasses.Manager
         static DateTime Timer = new DateTime();
         static List<MoveableObject> Entities = new List<MoveableObject>();
         static List<MoveableObject> EntitiesToDestroy = new List<MoveableObject>();
+        static List<MoveableObject> EntitiesToAdd = new List<MoveableObject>();
+        public static bool finish = false;
         public static Map Map
         {
             private get;
@@ -25,7 +27,7 @@ namespace AsciiShooter.BasicClasses.Manager
         /// <param name="obj">Object to add</param>
         public static void Add(MoveableObject obj)
         {
-            Entities.Add(obj);
+            EntitiesToAdd.Add(obj);
         }
 
         /// <summary>
@@ -86,7 +88,12 @@ namespace AsciiShooter.BasicClasses.Manager
                     Entities[i].Position = newPos;
                 }
             }
+            AddNewEntities();
+            if (finish)
+                Clear();
             DestroyObjects();
+            if (finish)
+                Map = null;
         }
 
         /// <summary>
@@ -131,7 +138,6 @@ namespace AsciiShooter.BasicClasses.Manager
         /// Removes Object from EntityList and Redraws Map at their Position
         /// </summary>
         private static void DestroyObjects()
-        
         {
             //Redraw Position of Destroyed Object with Entity or MapData
             foreach (MoveableObject Obj in EntitiesToDestroy)
@@ -158,6 +164,15 @@ namespace AsciiShooter.BasicClasses.Manager
                 Entities.Remove(Obj);
             }
             EntitiesToDestroy.Clear();
+        }
+
+        private static void AddNewEntities()
+        {
+            foreach (MoveableObject NewObj in EntitiesToAdd)
+            {
+                Entities.Add(NewObj);
+            }
+            EntitiesToAdd.Clear();
         }
 
         public static void Clear()

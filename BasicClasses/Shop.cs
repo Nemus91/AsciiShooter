@@ -10,8 +10,7 @@ namespace AsciiShooter
 {
     class Shop : GameObject
     {
-
-        Map map;
+        public Game game;
 
         Player player;
 
@@ -84,8 +83,12 @@ namespace AsciiShooter
 
             if (checkedmoney == true)
             {
-                player.Money -= mp5ammovalue;
-                player.Ammo += 10;
+                int WeaponIndex = GetWeaponIndex(typeof(MP5));
+                if (WeaponIndex != -1)
+                {
+                    player.Money -= mp5ammovalue;
+                    player.Weaponlist[WeaponIndex].Ammunition += 10;
+                }
             }
         }
 
@@ -107,8 +110,12 @@ namespace AsciiShooter
 
             if (checkedmoney == true)
             {
-                player.Money -= ak47ammovalue;
-                player.Ammo += 10;
+                int WeaponIndex = GetWeaponIndex(typeof(Ak47));
+                if (WeaponIndex != -1)
+                {
+                    player.Money -= ak47ammovalue;
+                    player.Weaponlist[WeaponIndex].Ammunition += 10;
+                }
             }
         }
 
@@ -130,8 +137,12 @@ namespace AsciiShooter
 
             if (checkedmoney == true)
             {
-                player.Money -= rocketvalue;
-                player.Ammo += 3;
+                int WeaponIndex = GetWeaponIndex(typeof(Rocketlauncher));
+                if (WeaponIndex != -1)
+                {
+                    player.Money -= rocketvalue;
+                    player.Weaponlist[WeaponIndex].Ammunition += 3;
+                }
             }
         }
 
@@ -159,9 +170,19 @@ namespace AsciiShooter
             }
         }
 
+        private int GetWeaponIndex(System.Type Weapontype)
+        {
+            for (int i = 0; i < player.Weaponlist.Count - 1; i++)
+            {
+                if (player.Weaponlist[i].GetType() == Weapontype)
+                    return i;
+            }
+            return -1;
+        }
+
         private void Exit()
         {
-// BITTE FÜLL MICH AUS^^
+            game.Nextlevel();
         }
     
     }

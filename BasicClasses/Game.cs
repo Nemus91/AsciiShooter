@@ -88,8 +88,7 @@ namespace AsciiShooter
         /// </summary>
         public void Endlevel()
         {
-            MoveableObjectManager.Map = null;
-            MoveableObjectManager.Clear();
+            MoveableObjectManager.finish = true;
             Shop Shop = new Shop(PlayerInstance);
             Shop.game = this;
         }
